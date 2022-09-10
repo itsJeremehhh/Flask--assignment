@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>foreign exchange rates</title>
+</head>
+<body>
+    <h1>Foreign converter</h1>
+    <form action="/convert">
+        <div>
+            Converting from<input name="from-currency" type="text">
+        </div> 
+        <div>
+        <br>
+        Converting to <input name="to-currency" type="text">
+        <br>   
+        </div>
+        <br>
+        <div id="symbol">
+            Amount:<input name="amount" type="text">
+        </div> 
+        <br>
+        <button>Convert</button>
+        <div>
+            <!-- need to code an area where converted ammount with currency code can show -->
+            <p>
+                {{ result }}
+            </p>
+        </div>
+    </form>
+
+
+
+</body>
+</html>
