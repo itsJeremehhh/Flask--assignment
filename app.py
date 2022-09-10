@@ -1,4 +1,4 @@
-from flask import Flask, request, flash, session
+from flask import Flask, request, flash, session, render_template
 from forex_python.converter import CurrencyCodes, CurrencyRates
 
 app = Flask(__name__)
@@ -15,7 +15,7 @@ def homepage():
 
     return render_template("index.html")
 
-
+@app.route('/convert')
 def convert_from_currency():
     """get the Currency from and make sure it's Correct."""
     c = CurrencyRates()
@@ -24,20 +24,21 @@ def convert_from_currency():
     from_curr = request.args["from-currency"]
     # and now where they are going to in which we will also make sure the correct code is used.
     to_curr = request.args["to-currency"]
-    amount = request.args["amount"]
+    amount = float(request.args["amount"])
+    results = c.convert(from_curr, to_curr, amount)
     # make a condintional to confirm the proper codes are use, so there shouldnt be any Numbers at from_currency
-    if from_curr.isnumeric() == True:
-        flash("Please use a proper Currency code")
+    # if from_curr.isnumeric() == True:
+    #     flash("Please use a proper Currency code")
     #trying to make sure the code will actually match the list of currency codes and we will convert them to uppercase so they will match
-    elif from_curr.upper() != CurrencyCodes():
-        flash("Incorrect Currency code")
+    # elif from_curr.upper() != CurrencyCodes():
+    #     flash("Incorrect Currency code")
     # need to find something to place here that allows the user to continue once the right currency code was inserted
-    else:
-        text = text.replace("from-currency")
+    # else:
+    #     text = text.replace("from-currency")
 
 
 
-        return text("from-currency", text = text)
+    return render_template("results.html", results=results)
 
 def convert_to_currency():
     """Get the currency to and make sure its correct."""
